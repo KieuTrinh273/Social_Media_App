@@ -59,7 +59,7 @@ public class Constant {
         public static final String ID = "id";
     }
 
-    public static final class GROUP_TABLE_FIELD {
+    public static final class GROUP_CHAT_TABLE_FIELD {
         public static final String ID = "id";
         public static final String TITLE = "title";
         public static final String DESCRIPTION = "description";

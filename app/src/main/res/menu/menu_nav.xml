@@ -16,4 +16,9 @@
         android:id="@+id/nav_message"
         android:icon="@drawable/ic_message_black"
         android:title="@string/message" />
+
+    <item
+        android:id="@+id/nav_more"
+        android:icon="@drawable/ic_more_black"
+        android:title="@string/more" />
 </menu>

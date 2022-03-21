@@ -22,7 +22,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -127,16 +126,16 @@ public class CreateGroupActivity extends AppCompatActivity {
         String groupDescription = groupDescriptionEt.getText().toString().trim();
         String createdDateTime = "" + System.currentTimeMillis();
 
-        if(TextUtils.isEmpty(groupTitle)){
+        if (TextUtils.isEmpty(groupTitle)) {
             Toast.makeText(this, "Group title required...", Toast.LENGTH_SHORT).show();
             return;
         }
 
         progressDialog.show();
 
-        if(Objects.isNull(image_uri)){
+        if (Objects.isNull(image_uri)) {
             createGroup(createdDateTime, groupTitle, groupDescription, "");
-        }else {
+        } else {
             String fileNameAndPath = "Group_Icon/image" + createdDateTime;
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(fileNameAndPath);
             storageReference.putFile(image_uri)
@@ -144,9 +143,9 @@ public class CreateGroupActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
+                            while (!uriTask.isSuccessful()) ;
                             Uri downloadUri = uriTask.getResult();
-                            if(uriTask.isSuccessful()){
+                            if (uriTask.isSuccessful()) {
                                 createGroup(createdDateTime, groupTitle, groupDescription, String.valueOf(downloadUri));
                             }
                         }
@@ -163,12 +162,12 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     private void createGroup(String createdDateTime, String groupTitle, String groupDescription, String icon) {
         Map<String, String> map = new HashMap<>();
-        map.put(Constant.GROUP_TABLE_FIELD.ID, createdDateTime);
-        map.put(Constant.GROUP_TABLE_FIELD.TITLE, groupTitle);
-        map.put(Constant.GROUP_TABLE_FIELD.DESCRIPTION, groupDescription);
-        map.put(Constant.GROUP_TABLE_FIELD.ICON, icon);
-        map.put(Constant.GROUP_TABLE_FIELD.CREATED_DATETIME, createdDateTime);
-        map.put(Constant.GROUP_TABLE_FIELD.CREATED_BY, firebaseAuth.getUid());
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.ID, createdDateTime);
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.TITLE, groupTitle);
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.DESCRIPTION, groupDescription);
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.ICON, icon);
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.CREATED_DATETIME, createdDateTime);
+        map.put(Constant.GROUP_CHAT_TABLE_FIELD.CREATED_BY, firebaseAuth.getUid());
 
         //create group
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constant.TABLE.GROUP);
@@ -184,7 +183,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constant.TABLE.GROUP);
                         dbRef.child(createdDateTime)
-                                .child(Constant.GROUP_TABLE_FIELD.PARTICIPANTS)
+                                .child(Constant.GROUP_CHAT_TABLE_FIELD.PARTICIPANTS)
                                 .child(firebaseAuth.getUid())
                                 .setValue(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

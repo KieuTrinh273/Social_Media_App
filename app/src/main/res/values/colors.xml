@@ -14,6 +14,7 @@
     <color name="profile_info_background">#77000000</color>
     <color name="gray">#959595</color>
     <color name="background_gray">#eee</color>
+    <color name="gray_message">#666262</color>
 
     <!--For activities containing toolbar-->
     <!--Theme without ActionBar-->

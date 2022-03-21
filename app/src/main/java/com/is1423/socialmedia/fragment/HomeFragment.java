@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.is1423.socialmedia.AddPostActivity;
+import com.is1423.socialmedia.CreateGroupActivity;
 import com.is1423.socialmedia.MainActivity;
 import com.is1423.socialmedia.MessageActivity;
 import com.is1423.socialmedia.R;
@@ -68,22 +69,21 @@ public class HomeFragment extends Fragment {
     /*handle menu item clicks*/
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //get item id
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             firebaseAuth.signOut();
             checkUserStatus();
             updateOnlineStatus(Constant.USER_STATUS.OFFLINE);
-        }
-        if (id == R.id.action_add_post) {
-            startActivity(new Intent(getActivity(), AddPostActivity.class));
+        } else if (id == R.id.action_create_group) {
+            startActivity(new Intent(getActivity(), CreateGroupActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void checkUserStatus() {
-
-        if (fUser != null) {
+        //get current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
             //user signed in => stay here
         } else {
             //user not signed in, go main

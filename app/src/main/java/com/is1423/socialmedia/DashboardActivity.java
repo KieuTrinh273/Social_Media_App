@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.PopupMenu;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.is1423.socialmedia.common.Constant;
+import com.is1423.socialmedia.fragment.GroupChatFragment;
 import com.is1423.socialmedia.fragment.HomeFragment;
 import com.is1423.socialmedia.fragment.MessageListFragment;
 import com.is1423.socialmedia.fragment.ProfileFragment;
@@ -133,10 +137,34 @@ public class DashboardActivity extends AppCompatActivity {
                     messageFt.replace(R.id.content, messageListFragment, "");
                     messageFt.commit();
                     return true;
+                case R.id.nav_more:
+                    showMoreOptions();
+                    return true;
             }
             return false;
         }
     };
+
+    private void showMoreOptions() {
+        PopupMenu popupMenu = new PopupMenu(this, bottomNavigationView, Gravity.END);
+        popupMenu.getMenu().add(Menu.NONE, 0, 0, "Group Chats");
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                if (id == 0) {
+                    actionBar.setTitle("Group Chats");
+                    GroupChatFragment fragment = new GroupChatFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content, fragment, "");
+                    fragmentTransaction.commit();
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
 
     private void checkUserStatus() {
         //get current user
