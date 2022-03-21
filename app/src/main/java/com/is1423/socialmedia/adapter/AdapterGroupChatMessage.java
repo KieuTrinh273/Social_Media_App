@@ -5,6 +5,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.is1423.socialmedia.R;
 import com.is1423.socialmedia.common.Constant;
 import com.is1423.socialmedia.domain.GroupChatMessage;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.List;
@@ -57,6 +59,24 @@ public class AdapterGroupChatMessage extends RecyclerView.Adapter<AdapterGroupCh
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         GroupChatMessage groupChatMessage = groupChatMessageList.get(position);
         String message = groupChatMessage.getMessage();
+        String type = groupChatMessage.getType();
+
+        if (type.equals(Constant.MESSAGE_TYPE.TEXT)) {
+            holder.messageTv.setVisibility(View.VISIBLE);
+            holder.messageIv.setVisibility(View.GONE);
+
+            holder.messageTv.setText(message);
+        } else {
+            holder.messageTv.setVisibility(View.GONE);
+            holder.messageIv.setVisibility(View.VISIBLE);
+
+            try {
+                Picasso.get().load(message).placeholder(R.drawable.ic_image_black).into(holder.messageIv);
+            } catch (Exception e) {
+                holder.messageIv.setImageResource(R.drawable.ic_image_black);
+            }
+        }
+
         if (Objects.nonNull(groupChatMessage.getSendDatetime())) {
             String time = groupChatMessage.getSendDatetime();
 
@@ -105,12 +125,14 @@ public class AdapterGroupChatMessage extends RecyclerView.Adapter<AdapterGroupCh
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private TextView nameTv, messageTv, timeTv;
+        private ImageView messageIv;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.nameTv);
             messageTv = itemView.findViewById(R.id.messageTv);
             timeTv = itemView.findViewById(R.id.timeTv);
+            messageIv = itemView.findViewById(R.id.messageIv);
         }
     }
 }

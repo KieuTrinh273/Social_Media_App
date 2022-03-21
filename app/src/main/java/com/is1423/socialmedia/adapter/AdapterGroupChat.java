@@ -79,16 +79,21 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds: snapshot.getChildren()){
-                            String message = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.MESSAGE).getValue();
-                            String time = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENT_DATETIME).getValue();
-                            String sender = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENDER).getValue();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            String message = "" + ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.MESSAGE).getValue();
+                            String time = "" + ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENT_DATETIME).getValue();
+                            String sender = "" + ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENDER).getValue();
+                            String type = "" + ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.TYPE).getValue();
 
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             cal.setTimeInMillis(Long.parseLong(time));
                             String sendDatetime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
 
-                            holder.messageTv.setText(message);
+                            if (type.equals(Constant.MESSAGE_TYPE.IMAGE)) {
+                                holder.messageTv.setText("Sent Photo");
+                            } else {
+                                holder.messageTv.setText(message);
+                            }
                             holder.timeTv.setText(sendDatetime);
 
                             DatabaseReference userDbRef = FirebaseDatabase.getInstance().getReference(Constant.TABLE.USER);
@@ -96,8 +101,8 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
                                     .addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            for (DataSnapshot ds:snapshot.getChildren()){
-                                                String name = ""+ds.child(Constant.USER_TABLE_FIELD.NAME).getValue();
+                                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                                String name = "" + ds.child(Constant.USER_TABLE_FIELD.NAME).getValue();
                                                 holder.nameTv.setText(name);
                                             }
                                         }
