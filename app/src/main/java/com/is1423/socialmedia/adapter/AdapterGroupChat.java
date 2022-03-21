@@ -2,6 +2,7 @@ package com.is1423.socialmedia.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.is1423.socialmedia.GroupChatActivity;
 import com.is1423.socialmedia.R;
 import com.is1423.socialmedia.common.Constant;
 import com.is1423.socialmedia.domain.GroupChat;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.HolderGroupChat> {
     private Context context;
@@ -44,6 +50,12 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
         String groupIcon = groupChat.getIcon();
         String groupTitle = groupChat.getTitle();
 
+        holder.nameTv.setText("");
+        holder.timeTv.setText("");
+        holder.messageTv.setText("");
+
+        loadLastMessage(groupChat, holder);
+
         holder.groupTitleTv.setText(groupTitle);
         try {
             Picasso.get().load(groupIcon).placeholder(R.drawable.ic_group_primary).into(holder.groupIconCiv);
@@ -59,6 +71,50 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
                 context.startActivity(intent);
             }
         });
+    }
+
+    private void loadLastMessage(GroupChat groupChat, HolderGroupChat holder) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constant.TABLE.GROUP);
+        reference.child(groupChat.getId()).child(Constant.GROUP_CHAT_TABLE_FIELD.MESSAGES).limitToLast(1)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            String message = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.MESSAGE).getValue();
+                            String time = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENT_DATETIME).getValue();
+                            String sender = ""+ds.child(Constant.GROUP_CHAT_MESSAGE_TABLE_FIELD.SENDER).getValue();
+
+                            Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                            cal.setTimeInMillis(Long.parseLong(time));
+                            String sendDatetime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
+
+                            holder.messageTv.setText(message);
+                            holder.timeTv.setText(sendDatetime);
+
+                            DatabaseReference userDbRef = FirebaseDatabase.getInstance().getReference(Constant.TABLE.USER);
+                            userDbRef.orderByChild(Constant.USER_TABLE_FIELD.UID).equalTo(sender)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot ds:snapshot.getChildren()){
+                                                String name = ""+ds.child(Constant.USER_TABLE_FIELD.NAME).getValue();
+                                                holder.nameTv.setText(name);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override

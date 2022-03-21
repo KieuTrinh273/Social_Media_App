@@ -140,9 +140,9 @@ public class MessageActivity extends AppCompatActivity {
                     }
                     nameTv.setText(name);
                     try {
-                        Picasso.get().load(partnerImg).placeholder(R.drawable.ic_default_img_white).into(profileCiv);
+                        Picasso.get().load(partnerImg).placeholder(R.drawable.ic_default_img_primary).into(profileCiv);
                     } catch (Exception e) {
-                        Picasso.get().load(R.drawable.ic_default_img_white).into(profileCiv);
+                        Picasso.get().load(R.drawable.ic_default_img_primary).into(profileCiv);
                     }
                 }
             }

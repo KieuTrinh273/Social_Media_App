@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMedia">
         <activity
+            android:name=".GroupParticipantAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".GroupChatActivity"
             android:theme="@style/AppThemeNo" />
         <activity

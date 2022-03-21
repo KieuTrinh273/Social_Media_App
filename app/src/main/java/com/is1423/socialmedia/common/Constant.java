@@ -67,12 +67,13 @@ public class Constant {
         public static final String CREATED_BY = "created_by";
         public static final String CREATED_DATETIME = "created_datetime";
         public static final String PARTICIPANTS = "participants";
+        public static final String MESSAGES = "Messages";
     }
 
     public static final class GROUP_CHAT_MESSAGE_TABLE_FIELD {
         public static final String SENDER = "sender";
         public static final String MESSAGE = "message";
-        public static final String SEND_DATETIME = "sendDatetime";
+        public static final String SENT_DATETIME = "sendDatetime";
         public static final String TYPE = "type";
     }
 
@@ -128,11 +129,20 @@ public class Constant {
 
     public static final class GROUP_MEMBER_ROLE {
         public static final String CREATOR = "creator";
+        public static final String ADMIN = "admin";
+        public static final String PARTICIPANT = "participant";
     }
 
     public static final class MESSAGE_SIDE {
         public static final int LEFT = 0;
         public static final int RIGHT = 1;
     }
+
+    public static final class ROLE_OPERATION {
+        public static final String REMOVE_ADMIN = "Remove Admin";
+        public static final String REMOVE_USER = "Remove User";
+        public static final String MAKE_ADMIN = "Make Admin";
+    }
+
 
 }

@@ -36,6 +36,7 @@
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_create_group.xml" value="0.264" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_dashboard.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_group_chat.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_group_participant_add.xml" value="0.1" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/activity_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/fragment_group_chat.xml" value="0.19895833333333332" />
@@ -45,7 +46,9 @@
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_groupchat_message_left.xml" value="0.264" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_groupchat_message_right.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_message_left.xml" value="0.176" />
+        <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_message_list.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_message_right.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_participant_add.xml" value="0.2" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/row_users.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/layout/update_password_dialog.xml" value="0.264" />
         <entry key="..\:/Users/Admin/Desktop/Social_Media_App/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />

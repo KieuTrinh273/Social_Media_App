@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
         //inflating menu
         menuInflater.inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.action_create_group).setVisible(false);
+        menu.findItem(R.id.action_add_participant).setVisible(false);
         super.onCreateOptionsMenu(menu, menuInflater);
     }
 
