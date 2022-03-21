@@ -30,4 +30,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date_time">Date time</string>
+    <string name="edit_group">Edit Group</string>
+    <string name="add_participant">Add Participant</string>
+    <string name="leave_group">Leave Group</string>
 </resources>

@@ -89,9 +89,9 @@ public class GroupChatActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         fUser = firebaseAuth.getCurrentUser();
+        getCurrentUserRole();
         loadGroupInfo();
         loadGroupChatMessage();
-        getCurrentUserRole();
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,12 +243,12 @@ public class GroupChatActivity extends AppCompatActivity {
         menu.findItem(R.id.action_logout).setVisible(false);
         menu.findItem(R.id.action_search).setVisible(false);
 
-        if (currentUserRole.equals(Constant.GROUP_MEMBER_ROLE.CREATOR) ||
-                currentUserRole.equals(Constant.GROUP_MEMBER_ROLE.ADMIN)) {
-            menu.findItem(R.id.action_add_participant).setVisible(true);
-        } else {
-            menu.findItem(R.id.action_add_participant).setVisible(false);
-        }
+//        if (currentUserRole.equals(Constant.GROUP_MEMBER_ROLE.CREATOR) ||
+//                currentUserRole.equals(Constant.GROUP_MEMBER_ROLE.ADMIN)) {
+//            menu.findItem(R.id.action_add_participant).setVisible(true);
+//        } else {
+//            menu.findItem(R.id.action_add_participant).setVisible(false);
+//        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -258,6 +258,10 @@ public class GroupChatActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_add_participant) {
             Intent intent = new Intent(this, GroupParticipantAddActivity.class);
+            intent.putExtra(Constant.COMMON_KEY.GROUPID_INTENT_KEY, groupId);
+            startActivity(intent);
+        } else if (id == R.id.action_groupInfo) {
+            Intent intent = new Intent(this, GroupInfoActivity.class);
             intent.putExtra(Constant.COMMON_KEY.GROUPID_INTENT_KEY, groupId);
             startActivity(intent);
         }
