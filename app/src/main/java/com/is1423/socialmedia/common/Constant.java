@@ -69,6 +69,13 @@ public class Constant {
         public static final String PARTICIPANTS = "participants";
     }
 
+    public static final class GROUP_CHAT_MESSAGE_TABLE_FIELD {
+        public static final String SENDER = "sender";
+        public static final String MESSAGE = "message";
+        public static final String SEND_DATETIME = "sendDatetime";
+        public static final String TYPE = "type";
+    }
+
     public static final class PARTICIPANTS_FIELD {
         public static final String UID = "uid";
         public static final String ROLE = "role";
@@ -78,7 +85,8 @@ public class Constant {
     public static final class COMMON_KEY {
         public static final String SHARED_PREFERENCES_SP_USER_NAME = "SP_USER";
         public static final String SHARED_PREFERENCES_CURRENT_USERID_KEY = "Current_USERID";
-        public static final String PARTNER_UID_KEY = "partnerUid";
+        public static final String PARTNER_UID_INTENT_KEY = "partnerUid";
+        public static final String GROUPID_INTENT_KEY = "groupId";
     }
 
     public static final class REMOTE_MESSAGE {
@@ -120,6 +128,11 @@ public class Constant {
 
     public static final class GROUP_MEMBER_ROLE {
         public static final String CREATOR = "creator";
+    }
+
+    public static final class MESSAGE_SIDE {
+        public static final int LEFT = 0;
+        public static final int RIGHT = 1;
     }
 
 }

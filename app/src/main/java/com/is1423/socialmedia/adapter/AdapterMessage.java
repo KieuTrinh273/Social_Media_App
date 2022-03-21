@@ -36,8 +36,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder> {
-    private static final int MSG_TYPE_LEFT = 0;
-    private static final int MSG_TYPE_RIGHT = 1;
     Context context;
     List<Message> messageList;
     String imageUrl;
@@ -53,7 +51,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == MSG_TYPE_RIGHT) {
+        if (viewType == Constant.MESSAGE_SIDE.RIGHT) {
             View view = LayoutInflater.from(context).inflate(R.layout.row_message_right, parent, false);
             return new MyHolder(view);
         } else {
@@ -67,7 +65,7 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder
         String message = messageList.get(position).getMessage();
         String type = messageList.get(position).getType();
 
-        if(Objects.nonNull(messageList.get(position).getSendDatetime())){
+        if (Objects.nonNull(messageList.get(position).getSendDatetime())) {
             String time = messageList.get(position).getSendDatetime();
 
             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -76,12 +74,12 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder
             holder.timeTv.setText(sendDatetime);
         }
         holder.messageTv.setText(message);
-        if(type.equals(Constant.MESSAGE_TYPE.TEXT)){
+        if (type.equals(Constant.MESSAGE_TYPE.TEXT)) {
             holder.messageTv.setVisibility(View.VISIBLE);
             holder.messageIv.setVisibility(View.GONE);
 
             holder.messageTv.setText(message);
-        }else {
+        } else {
             holder.messageTv.setVisibility(View.GONE);
             holder.messageIv.setVisibility(View.VISIBLE);
 
@@ -139,14 +137,14 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds: snapshot.getChildren()){
-                    if(ds.child(Constant.MESSAGE_TABLE_FIELD.SENDER).getValue().equals(currentUid)){
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child(Constant.MESSAGE_TABLE_FIELD.SENDER).getValue().equals(currentUid)) {
                         Map<String, Object> map = new HashMap<>();
                         map.put(Constant.MESSAGE_TABLE_FIELD.MESSAGE, Constant.MESSAGE_COMMON.DELETED);
                         ds.getRef().updateChildren(map);
 
                         Toast.makeText(context, "message deleted...", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(context, "You can delete only your message", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -168,8 +166,8 @@ public class AdapterMessage extends RecyclerView.Adapter<AdapterMessage.MyHolder
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (messageList.get(position).getSender().equals(firebaseUser.getUid())) {
-            return MSG_TYPE_RIGHT;
-        } else return MSG_TYPE_LEFT;
+            return Constant.MESSAGE_SIDE.RIGHT;
+        } else return Constant.MESSAGE_SIDE.LEFT;
     }
 
     //view holder class

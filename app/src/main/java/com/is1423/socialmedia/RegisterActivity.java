@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                             startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         //show error message
-                        Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -144,7 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
         //put data within hashmap in database
         reference.child(uid).setValue(hashMap);
 
-        Toast.makeText(RegisterActivity.this, "Registered...\n" + user.getEmail(), Toast.LENGTH_LONG).show();
+        Toast.makeText(RegisterActivity.this, "Registered...\n" + user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

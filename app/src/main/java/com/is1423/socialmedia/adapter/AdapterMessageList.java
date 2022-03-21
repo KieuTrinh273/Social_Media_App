@@ -2,7 +2,6 @@ package com.is1423.socialmedia.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.is1423.socialmedia.MessageActivity;
 import com.is1423.socialmedia.R;
 import com.is1423.socialmedia.common.Constant;
-import com.is1423.socialmedia.domain.MessageList;
 import com.is1423.socialmedia.domain.User;
 import com.squareup.picasso.Picasso;
 
@@ -73,7 +71,7 @@ public class AdapterMessageList extends RecyclerView.Adapter<AdapterMessageList.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MessageActivity.class);
-                intent.putExtra(Constant.COMMON_KEY.PARTNER_UID_KEY, partnerUid);
+                intent.putExtra(Constant.COMMON_KEY.PARTNER_UID_INTENT_KEY, partnerUid);
                 context.startActivity(intent);
             }
         });

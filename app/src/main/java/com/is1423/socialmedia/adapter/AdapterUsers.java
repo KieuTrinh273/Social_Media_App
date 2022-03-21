@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +64,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                  * use UID to identify user*/
 
                 Intent intent = new Intent(context, MessageActivity.class);
-                intent.putExtra(Constant.COMMON_KEY.PARTNER_UID_KEY, uid);
+                intent.putExtra(Constant.COMMON_KEY.PARTNER_UID_INTENT_KEY, uid);
                 context.startActivity(intent);
             }
         });

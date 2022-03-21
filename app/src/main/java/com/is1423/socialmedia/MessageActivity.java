@@ -118,7 +118,7 @@ public class MessageActivity extends AppCompatActivity {
         /*using intent to pass user's uid
          * from uid => get profile picture, name and start chatting*/
         Intent intent = getIntent();
-        partnerUid = intent.getStringExtra(Constant.COMMON_KEY.PARTNER_UID_KEY);
+        partnerUid = intent.getStringExtra(Constant.COMMON_KEY.PARTNER_UID_INTENT_KEY);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();

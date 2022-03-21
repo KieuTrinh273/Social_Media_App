@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SocialMedia">
         <activity
             android:name=".GroupChatActivity"
-            android:exported="false" />
+            android:theme="@style/AppThemeNo" />
         <activity
             android:name=".CreateGroupActivity"
             android:exported="false" />

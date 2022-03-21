@@ -502,14 +502,14 @@ public class ProfileFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             pd.dismiss();
-                                            Toast.makeText(getActivity(), "Image updated...", Toast.LENGTH_LONG);
+                                            Toast.makeText(getActivity(), "Image updated...", Toast.LENGTH_SHORT);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             pd.dismiss();
-                                            Toast.makeText(getActivity(), "Error while updating image...", Toast.LENGTH_LONG);
+                                            Toast.makeText(getActivity(), "Error while updating image...", Toast.LENGTH_SHORT);
                                         }
                                     });
                         } else {

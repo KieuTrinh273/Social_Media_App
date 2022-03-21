@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.is1423.socialmedia.GroupChatActivity;
 import com.is1423.socialmedia.R;
+import com.is1423.socialmedia.common.Constant;
 import com.is1423.socialmedia.domain.GroupChat;
 import com.squareup.picasso.Picasso;
 
@@ -54,7 +55,7 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, GroupChatActivity.class);
-                intent.putExtra("groupId", groupId);
+                intent.putExtra(Constant.COMMON_KEY.GROUPID_INTENT_KEY, groupId);
                 context.startActivity(intent);
             }
         });
